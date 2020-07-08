@@ -1,0 +1,449 @@
+{
+	"info": {
+		"_postman_id": "2391588c-50c1-44fa-8dc0-30258c80cd54",
+		"name": "Chatapp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authuntication",
+			"item": [
+				{
+					"name": "Register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5b511ee6-ad78-4da1-b60e-af5bac8fbbf1",
+								"exec": [
+									"pm.environment.set(\"TOKEN\", pm.response.json().token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Woufu\",\n    \"email\": \"woufu@aol.com\",\n    \"password\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/auth/register",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "00aea3f0-9f0d-4533-8602-7664c6cc580e",
+								"exec": [
+									"pm.environment.set(\"TOKEN\", pm.response.json().token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"woufu@aol.com\",\n    \"password\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/auth/login",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get logged user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/auth/me",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update logged user avatar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": "/Users/mac/Pictures/oscar.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/auth/me/avatar",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"me",
+								"avatar"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Chatroom",
+			"item": [
+				{
+					"name": "Get all chatroom by userId",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/chatrooms",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"chatrooms"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Chatroom",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"JavaScript\",\n    \"avatar_url\": \"https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/chatrooms",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"chatrooms"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Chatroom",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Nodejs React\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/chatrooms/5ef9972a2773b0f20c84e98e",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"chatrooms",
+								"5ef9972a2773b0f20c84e98e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Chatroom",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/chatrooms/5ef9a1fb6a3139f4506c1456",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"chatrooms",
+								"5ef9a1fb6a3139f4506c1456"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Messages",
+			"item": [
+				{
+					"name": "Get messages by chatroom",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/chatrooms/5ef9972a2773b0f20c84e98e/messages",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"chatrooms",
+								"5ef9972a2773b0f20c84e98e",
+								"messages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create message by chatroom",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"text\": \"hi!\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/chatrooms/5ef9972a2773b0f20c84e98e/messages",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"chatrooms",
+								"5ef9972a2773b0f20c84e98e",
+								"messages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update message",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"text\": \"Hello!\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/messages/5ef9b6fb15c57ff8d008cbcb",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"messages",
+								"5ef9b6fb15c57ff8d008cbcb"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete message",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/messages/5ef9b6fb15c57ff8d008cbcb",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"messages",
+								"5ef9b6fb15c57ff8d008cbcb"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
